@@ -12,7 +12,7 @@
 // };
 
 function longestCommonPrefix(strs: string[]): string {
-    if (!strs.length) return "";
++    if (!strs.length) return "";
 
     strs.sort();
     let first = strs[0], last = strs[strs.length - 1];
