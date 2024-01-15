@@ -19,7 +19,17 @@ class Sort:
             for j in range(i + 1, len(my_list)):
                 if my_list[j] < my_list[min_index]:
                     min_index = j
-            
             if i != min_index:
                 self._swap(my_list, i, min_index)
+        return my_list
+    
+    
+    def insertion_sort(self, my_list):
+        for i in range(1, len(my_list)):
+            temp = my_list[i]
+            j = i - 1
+            while j >= 0 and temp < my_list[j]:
+                my_list[j+1] = my_list[j]
+                my_list[j] = temp
+                j -= 1
         return my_list
