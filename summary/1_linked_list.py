@@ -215,6 +215,32 @@ class LinkedList:
         while temp.next is not None:
             temp = temp.next
         self.tail = temp
+    
+    def merge(self, other_list):
+        current = self.head
+        other_current = other_list.head
+        dummy = Node(0)
+        new_current = dummy
+        
+        while current is not None and other_current is not None:
+            if current.value < other_current.value:
+                new_current.next = current
+                current = current.next
+            else:
+                new_current.next = other_current
+                other_current = other_current.next
+            
+            new_current = new_current.next
+        
+        if current is not None:
+            new_current.next = current
+            # The tail remains at the last
+        else:
+            new_current.next = other_current
+            self.tail = other_list.tail          
+        
+        self.head = dummy.next
+        self.length = self.length + other_list.length
 
 def test_bubble_sort():
     my_linked_list = LinkedList(4)
@@ -333,8 +359,39 @@ def test_insertion_sort():
 
     """
 
+def test_merge_sort():
+    l1 = LinkedList(1)
+    l1.append(3)
+    l1.append(5)
+    l1.append(7)
+
+
+    l2 = LinkedList(2)
+    l2.append(4)
+    l2.append(6)
+    l2.append(8)
+
+    l1.merge(l2)
+
+    l1.print_list()
+
+
+    """
+        EXPECTED OUTPUT:
+        ----------------
+        1 
+        2 
+        3 
+        4 
+        5 
+        6 
+        7
+        8
+
+    """
 
 if __name__ == "__main__":
     # test_bubble_sort()
     # test_selection_sort()
-    test_insertion_sort()
+    # test_insertion_sort()
+    test_merge_sort()
