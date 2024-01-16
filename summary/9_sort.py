@@ -33,3 +33,36 @@ class Sort:
                 my_list[j] = temp
                 j -= 1
         return my_list
+    
+    def _merge(self, my_list1, my_list2):
+        merged = []
+        i = 0
+        j = 0
+        while i < len(my_list1) and j < len(my_list2):
+            if my_list1[i] < my_list2[j]:
+                merged.append(my_list1[i])
+                i += 1
+            else:
+                merged.append(my_list2[j])
+                j += 1
+        
+        while i < len(my_list1):
+            merged.append(my_list1[i])
+            i += 1
+        
+        while j < len(my_list2):
+            merged.append(my_list2[j])
+            j += 1
+        
+        return merged
+    
+    def merge_sort(self, my_list):
+        if len(my_list) == 1:
+            return my_list
+        
+        mid_index = int(len(my_list) / 2)
+        
+        left = self.merge_sort(my_list[:mid_index])
+        right = self.merge_sort(my_list[mid_index:])
+        
+        return self._merge(left, right)
