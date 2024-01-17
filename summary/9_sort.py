@@ -66,3 +66,25 @@ class Sort:
         right = self.merge_sort(my_list[mid_index:])
         
         return self._merge(left, right)
+
+    def _pivot(self, my_list, pivot_index, end_index):
+        swap_index = pivot_index
+        
+        for i in range(pivot_index + 1, end_index + 1):
+            if my_list[i] < my_list[pivot_index]:
+                swap_index += 1
+                self._swap(my_list, swap_index, i)
+        
+        self._swap(my_list, pivot_index, swap_index)
+        return swap_index
+      
+    def _r_quick_sort(self, my_list, left, right):
+        if left < right:
+            pivot_index = self._pivot(my_list, left, right)
+            self._r_quick_sort(my_list, left, pivot_index-1)
+            self._r_quick_sort(my_list, pivot_index + 1, right)
+        return my_list
+      
+
+    def quick_sort(self, my_list):
+        return self._r_quick_sort(my_list, 0, len(my_list) - 1)
